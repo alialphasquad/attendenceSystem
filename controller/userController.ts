@@ -1,8 +1,8 @@
 import express, { Express, Request, Response } from "express";
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -87,6 +87,9 @@ export const deleteUser = async (req: Request, res: Response) => {
       where: {
         id: Number(id),
       },
+    });
+    res.status(200).send({
+      message: "User deleted",
     });
   } catch (error) {
     console.log(error);
