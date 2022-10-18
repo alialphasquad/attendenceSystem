@@ -60,7 +60,6 @@ export const getUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-
     let user = await prisma.user.update({
       where: {
         id: Number(id),
