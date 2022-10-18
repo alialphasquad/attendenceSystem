@@ -1,6 +1,6 @@
 import express from "express";
 import {createUser,getUser,updateUser,deleteUser,logInUser} from '../controller/userController';
-
+import {authenticateToken} from '../middleware/authMiddleware'
 const router = express.Router();
 
 /**
@@ -61,6 +61,8 @@ const router = express.Router();
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/User'
+ *     security:
+ *       - myAuth: []
  *     responses:
  *       200:
  *         description: User created
@@ -71,7 +73,7 @@ const router = express.Router();
  *       500:
  *         description: Internal Server Error 
  */
-router.route("/create").post(createUser);
+router.route("/create").post(authenticateToken,createUser);
 
 /**
  * @swagger
@@ -80,6 +82,8 @@ router.route("/create").post(createUser);
  *     get:
  *       summary: get user
  *       tags: [User]
+ *       security:
+ *         - myAuth: []
  *       responses:
  *         200:
  *           description: Success.
@@ -88,7 +92,7 @@ router.route("/create").post(createUser);
  *         500:
  *           description: Internal Server Error
  */
-router.route("/get").get(getUser);
+router.route("/get").get(authenticateToken,getUser);
 
 /**
  * @swagger
@@ -109,6 +113,8 @@ router.route("/get").get(getUser);
  *            application/json:
  *              schema:
  *                $ref: '#/components/schemas/User'
+ *        security:
+ *          - myAuth: []
  *        responses:
  *          200:
  *            description: The User was updated
@@ -119,7 +125,7 @@ router.route("/get").get(getUser);
  *          500:
  *            description: internal server error
  */
-router.route("/update/:id").put(updateUser);
+router.route("/update/:id").put(authenticateToken,updateUser);
 
 /**
  * @swagger
@@ -134,15 +140,40 @@ router.route("/update/:id").put(updateUser);
  *            schema:
  *              type: integer
  *            required: true
+ *        security:
+ *          - myAuth: []
  *        responses:
  *          200:
  *            description: User deleted
  *          500:
  *            description: Internal server error
  */
-router.route("/delete/:id").delete(deleteUser);
+router.route("/delete/:id").delete(authenticateToken,deleteUser);
 
-
+/**
+ * @swagger
+ * /user/login:
+ *   post:
+ *     description: Returns token for authorized User
+ *     tags: [User]
+ *     content:
+ *       - application/json:
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       200:
+ *         description: successful login
+ *         schema:
+ *           $ref: '#/components/schemas/User'
+ *       403:
+ *         description: Invalid password
+ *       500:
+ *         description: Internal Server Error
+ */
 router.route("/login").post(logInUser);
 
 

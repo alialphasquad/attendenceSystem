@@ -1,6 +1,6 @@
 import express from "express";
 import {addAttendance,getUserAttendance,summary,updateAttendance} from '../controller/attendanceController';
-
+import {authenticateToken} from '../middleware/authMiddleware'
 const router = express.Router();
 
 /**
@@ -52,6 +52,8 @@ const router = express.Router();
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/Attendance'
+ *     security:
+ *       - myAuth: []
  *     responses:
  *       200:
  *         description: Add Attendance
@@ -78,6 +80,8 @@ router.route("/addAttendance").post(addAttendance);
  *           required: true
  *           schema:
  *             type: integer
+ *       security:
+ *         - myAuth: []
  *       responses:
  *         200:
  *           description: Success.
@@ -86,7 +90,7 @@ router.route("/addAttendance").post(addAttendance);
  *         500:
  *           description: Internal Server Error
  */
-router.route("/get/:id").get(getUserAttendance);
+router.route("/get/:id").get(authenticateToken,getUserAttendance);
 
 /**
  * @swagger
@@ -95,6 +99,8 @@ router.route("/get/:id").get(getUserAttendance);
  *     get:
  *       summary: Attendance Summary
  *       tags: [Attendance]
+ *       security:
+ *         - myAuth: []
  *       responses:
  *         200:
  *           description: Success.
@@ -103,7 +109,7 @@ router.route("/get/:id").get(getUserAttendance);
  *         500:
  *           description: Internal Server Error
  */
-router.route("/summary").get(summary);
+router.route("/summary").get(authenticateToken,summary);
 
 /**
  * @swagger
@@ -124,6 +130,8 @@ router.route("/summary").get(summary);
  *            application/json:
  *              schema:
  *                $ref: '#/components/schemas/Attendance'
+ *        security:
+ *          - myAuth: []
  *        responses:
  *          200:
  *            description: Attendance update
@@ -134,7 +142,7 @@ router.route("/summary").get(summary);
  *          500:
  *            description: internal server error
  */
-router.route("/update/:id").put(updateAttendance);
+router.route("/update/:id").put(authenticateToken,updateAttendance);
 
 
 export default router;

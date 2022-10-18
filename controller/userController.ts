@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
 
 export const createUser = async (req: Request, res: Response) => {
@@ -17,6 +17,7 @@ export const createUser = async (req: Request, res: Response) => {
         password: hashedPassword,
         lastLogin: new Date(),
         createdAt: new Date(),
+        role: req.body.role
       },
     });
     let tokenGenerator = {
@@ -102,7 +103,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 
 export const logInUser = async (req: Request, res: Response) => {
   try {
-    let { id, password } = req.body;
+    let { id, password , role} = req.body;
     let user: any = await prisma.user.findFirst({
         where: { id: id },
       });
@@ -113,6 +114,7 @@ export const logInUser = async (req: Request, res: Response) => {
             id: user.id,
             email: user.email,
             name: user.first_name,
+            role:user.role
           };
           let token = jwt.sign(tokenGenerator, process.env.SECRET, {
             expiresIn: "1y",

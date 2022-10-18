@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 const nodemailer = require("nodemailer");
 const prisma = new PrismaClient();
-
+const date = new Date();
 export const addAttendance = async (req: Request, res: Response) => {
   try {
     const attendance = await prisma.attendance.create({
@@ -67,10 +67,12 @@ export const summary = async (req: Request, res: Response) => {
     });
   }
 };
+
+
+
 export const updateAttendance = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-
     let attendance = await prisma.attendance.update({
       where: {
         id: Number(id),
@@ -108,7 +110,7 @@ const sendEmail = () => {
     };
     const transporter = nodemailer.createTransport({
       host: process.env.HOST,
-      port: process.env.PORT,
+      port: process.env.PORT2,
       auth: {
         user: process.env.USER,
         password: process.env.PASSWORD,
