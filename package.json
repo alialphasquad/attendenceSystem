@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-
   "scripts": {
     "start": "node index.ts",
     "start:dev": "nodemon index.ts",
@@ -31,7 +30,7 @@
     "npm": "8.19.2",
     "node": "v16.13.2"
   },
-
+  "type": "commonjs",
   "dependencies": {
     "@prisma/client": "^4.4.0",
     "bcryptjs": "^2.4.3",
