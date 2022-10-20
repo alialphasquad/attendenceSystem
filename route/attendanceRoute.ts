@@ -145,4 +145,4 @@ router.route("/summary").get(authenticateToken,summary);
 router.route("/update/:id").put(authenticateToken,updateAttendance);
 
 
-export default router;
+module.exports = router;

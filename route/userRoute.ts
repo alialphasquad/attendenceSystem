@@ -177,4 +177,4 @@ router.route("/delete/:id").delete(authenticateToken,deleteUser);
 router.route("/login").post(logInUser);
 
 
-export default router;
+module.exports = router
