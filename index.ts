@@ -1,4 +1,4 @@
-import express from "express";
+const express = require("express");
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
 import userRoute from "./route/userRoute";
