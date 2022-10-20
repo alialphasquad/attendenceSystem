@@ -1,4 +1,4 @@
-const express = require("express");
+import express, {Request,Response} from "express";
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 const userRoute = require("./route/userRoute");
@@ -38,7 +38,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/user", userRoute);
 app.use("/attendance", attendanceRoute);
-app.get("/", (req: any, res: any) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to Home Page");
   console.log("yo");
 });
