@@ -139,4 +139,4 @@ router.route("/summary").get(attendanceController_1.summary);
  *            description: internal server error
  */
 router.route("/update/:id").put(authMiddleware_1.authenticateToken, attendanceController_1.updateAttendance);
-module.exports = router;
+exports.default = router;

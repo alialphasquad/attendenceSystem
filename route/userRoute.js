@@ -170,4 +170,4 @@ router.route("/delete/:id").delete(authMiddleware_1.authenticateToken, userContr
  *         description: Internal Server Error
  */
 router.route("/login").post(userController_1.logInUser);
-module.exports = router;
+exports.default = router;

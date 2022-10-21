@@ -1,9 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
-const userRoute = require("./route/userRoute.ts");
-const attendanceRoute = require("./route/attendanceRoute");
+const userRoute_1 = __importDefault(require("./route/userRoute"));
+const attendanceRoute_1 = __importDefault(require("./route/attendanceRoute"));
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
@@ -32,8 +36,8 @@ const specs = swaggerJsDoc(options);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/user", userRoute);
-app.use("/attendance", attendanceRoute);
+app.use("/user", userRoute_1.default);
+app.use("/attendance", attendanceRoute_1.default);
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
     console.log("yo");
