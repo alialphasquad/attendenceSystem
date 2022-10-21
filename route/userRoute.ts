@@ -1,5 +1,5 @@
 const express = require("express");
-import {createUser,getUser,updateUser,deleteUser,logInUser} from '../controller/userController';
+const {createUser,getUser,updateUser,deleteUser,logInUser} = require('../controller/userController');
 import {authenticateToken} from '../middleware/authMiddleware'
 const router = express.Router();
 

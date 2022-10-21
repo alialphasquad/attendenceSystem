@@ -1,5 +1,5 @@
 const express = require("express");
-import {addAttendance,getUserAttendance,summary,updateAttendance} from '../controller/attendanceController';
+const {addAttendance,getUserAttendance,summary,updateAttendance} = require('../controller/attendanceController');
 import {authenticateToken} from '../middleware/authMiddleware'
 const router = express.Router();
 

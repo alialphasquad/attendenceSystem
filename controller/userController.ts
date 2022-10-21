@@ -4,7 +4,7 @@ var bcrypt = require("bcryptjs");
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
 
-export const createUser = async (req: Request, res: Response) => {
+module.exports.createUser = async (req: Request, res: Response) => {
   try {
     var hashedPassword = bcrypt.hashSync(
       req.body.password,
@@ -43,7 +43,7 @@ export const createUser = async (req: Request, res: Response) => {
     });
   }
 };
-export const getUser = async (req: Request, res: Response) => {
+module.exports.getUser = async (req: Request, res: Response) => {
   try {
     const user = await prisma.user.findMany();
     res.status(200).send({
@@ -57,7 +57,7 @@ export const getUser = async (req: Request, res: Response) => {
     });
   }
 };
-export const updateUser = async (req: Request, res: Response) => {
+module.exports.updateUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     let user = await prisma.user.update({
@@ -80,7 +80,7 @@ export const updateUser = async (req: Request, res: Response) => {
     });
   }
 };
-export const deleteUser = async (req: Request, res: Response) => {
+module.exports.deleteUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const user = await prisma.user.delete({
@@ -100,7 +100,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-export const logInUser = async (req: Request, res: Response) => {
+module.exports.logInUser = async (req: Request, res: Response) => {
   try {
     let { id, password , role} = req.body;
     let user: any = await prisma.user.findFirst({

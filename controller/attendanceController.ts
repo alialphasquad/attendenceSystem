@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const nodemailer = require("nodemailer");
 const prisma = new PrismaClient();
 const date = new Date();
-export const addAttendance = async (req: Request, res: Response) => {
+module.exports.addAttendance = async (req: Request, res: Response) => {
   try {
     const attendance = await prisma.attendance.create({
       data: {
@@ -26,7 +26,7 @@ export const addAttendance = async (req: Request, res: Response) => {
     });
   }
 };
-export const getUserAttendance = async (req: Request, res: Response) => {
+module.exports.getUserAttendance = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const attendance = await prisma.user.findUnique({
@@ -49,7 +49,7 @@ export const getUserAttendance = async (req: Request, res: Response) => {
     });
   }
 };
-export const summary = async (req: Request, res: Response) => {
+module.exports.summary = async (req: Request, res: Response) => {
   try {
     const attendance = await prisma.user.findMany({
       include: {
@@ -70,7 +70,7 @@ export const summary = async (req: Request, res: Response) => {
 
 
 
-export const updateAttendance = async (req: Request, res: Response) => {
+module.exports.updateAttendance = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     let attendance = await prisma.attendance.update({
