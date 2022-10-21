@@ -1,8 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-import {addAttendance,getUserAttendance,summary,updateAttendance} from '../controller/attendanceController';
-import {authenticateToken} from '../middleware/authMiddleware'
+const attendanceController_1 = require("../controller/attendanceController");
+const authMiddleware_1 = require("../middleware/authMiddleware");
 const router = express.Router();
-
 /**
  * @swagger
  * components:
@@ -32,14 +33,12 @@ const router = express.Router();
  *       name: "Authorization"
  *       in: "header"
  */
-
 /**
  * @swagger
  * tags:
  *   name: Attendance
- *   description: User API  
+ *   description: User API
  */
-
 /**
  * @swagger
  * /attendance/addAttendance:
@@ -62,10 +61,9 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Attendance'
  *       500:
- *         description: Internal Server Error 
+ *         description: Internal Server Error
  */
-router.route("/addAttendance").post(addAttendance);
-
+router.route("/addAttendance").post(attendanceController_1.addAttendance);
 /**
  * @swagger
  * paths:
@@ -90,8 +88,7 @@ router.route("/addAttendance").post(addAttendance);
  *         500:
  *           description: Internal Server Error
  */
-router.route("/get/:id").get(getUserAttendance);
-
+router.route("/get/:id").get(attendanceController_1.getUserAttendance);
 /**
  * @swagger
  * paths:
@@ -109,8 +106,7 @@ router.route("/get/:id").get(getUserAttendance);
  *         500:
  *           description: Internal Server Error
  */
-router.route("/summary").get(summary);
-
+router.route("/summary").get(attendanceController_1.summary);
 /**
  * @swagger
  * paths:
@@ -142,7 +138,5 @@ router.route("/summary").get(summary);
  *          500:
  *            description: internal server error
  */
-router.route("/update/:id").put(authenticateToken,updateAttendance);
-
-
+router.route("/update/:id").put(authMiddleware_1.authenticateToken, attendanceController_1.updateAttendance);
 module.exports = router;

@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "node index.ts",
-    "start:dev": "nodemon index.ts",
+    "build": "npx tsc && npx prisma generate",
+    "start": "node index.js",
     "test": "jest -i"
   },
   "keywords": [],

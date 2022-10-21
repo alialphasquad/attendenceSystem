@@ -1,8 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-import {createUser,getUser,updateUser,deleteUser,logInUser} from '../controller/userController';
-import {authenticateToken} from '../middleware/authMiddleware'
+const userController_1 = require("../controller/userController");
+const authMiddleware_1 = require("../middleware/authMiddleware");
 const router = express.Router();
-
 /**
  * @swagger
  * components:
@@ -41,14 +42,12 @@ const router = express.Router();
  *       name: "Authorization"
  *       in: "header"
  */
-
 /**
  * @swagger
  * tags:
  *   name: User
- *   description: User API  
+ *   description: User API
  */
-
 /**
  * @swagger
  * /user/create:
@@ -71,10 +70,9 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/User'
  *       500:
- *         description: Internal Server Error 
+ *         description: Internal Server Error
  */
-router.route("/create").post(authenticateToken,createUser);
-
+router.route("/create").post(authMiddleware_1.authenticateToken, userController_1.createUser);
 /**
  * @swagger
  * paths:
@@ -92,8 +90,7 @@ router.route("/create").post(authenticateToken,createUser);
  *         500:
  *           description: Internal Server Error
  */
-router.route("/get").get(authenticateToken,getUser);
-
+router.route("/get").get(authMiddleware_1.authenticateToken, userController_1.getUser);
 /**
  * @swagger
  * paths:
@@ -125,8 +122,7 @@ router.route("/get").get(authenticateToken,getUser);
  *          500:
  *            description: internal server error
  */
-router.route("/update/:id").put(authenticateToken,updateUser);
-
+router.route("/update/:id").put(authMiddleware_1.authenticateToken, userController_1.updateUser);
 /**
  * @swagger
  * paths:
@@ -148,8 +144,7 @@ router.route("/update/:id").put(authenticateToken,updateUser);
  *          500:
  *            description: Internal server error
  */
-router.route("/delete/:id").delete(authenticateToken,deleteUser);
-
+router.route("/delete/:id").delete(authMiddleware_1.authenticateToken, userController_1.deleteUser);
 /**
  * @swagger
  * /user/login:
@@ -174,7 +169,5 @@ router.route("/delete/:id").delete(authenticateToken,deleteUser);
  *       500:
  *         description: Internal Server Error
  */
-router.route("/login").post(logInUser);
-
-
+router.route("/login").post(userController_1.logInUser);
 module.exports = router;
