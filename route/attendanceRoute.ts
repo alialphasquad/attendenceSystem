@@ -90,7 +90,7 @@ router.route("/addAttendance").post(addAttendance);
  *         500:
  *           description: Internal Server Error
  */
-router.route("/get/:id").get(authenticateToken,getUserAttendance);
+router.route("/get/:id").get(getUserAttendance);
 
 /**
  * @swagger
@@ -109,7 +109,7 @@ router.route("/get/:id").get(authenticateToken,getUserAttendance);
  *         500:
  *           description: Internal Server Error
  */
-router.route("/summary").get(authenticateToken,summary);
+router.route("/summary").get(summary);
 
 /**
  * @swagger
