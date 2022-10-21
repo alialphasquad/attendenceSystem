@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 app.use("/user", userRoute);
 app.use("/attendance", attendanceRoute);
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
   console.log("yo");
 });
