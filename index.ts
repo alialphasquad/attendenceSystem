@@ -38,7 +38,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/user", userRoute);
 app.use("/attendance", attendanceRoute);
-
+app.get('/', (req: any, res: any) => {
+  res.send('Server running!');
+});
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
   console.log("yo");
