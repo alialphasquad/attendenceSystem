@@ -6,6 +6,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "node index.ts",
+    "build": "CI= npm run build",
     "start:dev": "nodemon index.ts",
     "test": "jest -i"
   },
