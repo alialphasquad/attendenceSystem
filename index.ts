@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 
-const PORT =process.env.PORT || 9000;
+const port =process.env.PORT || 9000;
 app.use(express.json());
 app.use(
   bodyParser.urlencoded({
@@ -42,7 +42,7 @@ app.get("/", (res: any) => {
   res.send("Welcome to Home Page");
   console.log("yo");
 });
-app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
   console.log("yo");
 });
