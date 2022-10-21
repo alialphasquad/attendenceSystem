@@ -1,4 +1,4 @@
-import express from "express";
+const express = require("express");
 import {createUser,getUser,updateUser,deleteUser,logInUser} from '../controller/userController';
 import {authenticateToken} from '../middleware/authMiddleware'
 const router = express.Router();
