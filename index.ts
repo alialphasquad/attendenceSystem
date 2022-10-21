@@ -38,10 +38,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/user", userRoute);
 app.use("/attendance", attendanceRoute);
-// app.get("/", (res: any) => {
-//   res.send("Welcome to Home Page");
-//   console.log("yo");
-// });
+app.get("/", (res: any) => {
+  res.send("Welcome to Home Page");
+  console.log("yo");
+});
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
   console.log("yo");
