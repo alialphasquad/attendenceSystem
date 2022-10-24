@@ -95,8 +95,6 @@ router.route("/get/:id").get(getUserAttendance);
  *     get:
  *       summary: Attendance Summary
  *       tags: [Attendance]
- *       security:
- *         - myAuth: []
  *       responses:
  *         200:
  *           description: Success.
