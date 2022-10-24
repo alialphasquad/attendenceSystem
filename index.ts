@@ -26,6 +26,9 @@ const options = {
       {
         url: "http://localhost:9000",
       },
+      {
+        url:"https://attendancesystemalphasquad.herokuapp.com",
+      },
     ],
   },
   apis: ["./route/*.ts"],

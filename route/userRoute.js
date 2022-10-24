@@ -72,7 +72,7 @@ const router = express.Router();
  *       500:
  *         description: Internal Server Error
  */
-router.route("/create").post(authMiddleware_1.authenticateToken, userController_1.createUser);
+router.route("/create").post(userController_1.createUser);
 /**
  * @swagger
  * paths:
