@@ -52,8 +52,6 @@ const router = express.Router();
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/Attendance'
- *     security:
- *       - myAuth: []
  *     responses:
  *       200:
  *         description: Add Attendance
@@ -80,8 +78,6 @@ router.route("/addAttendance").post(addAttendance);
  *           required: true
  *           schema:
  *             type: integer
- *       security:
- *         - myAuth: []
  *       responses:
  *         200:
  *           description: Success.
