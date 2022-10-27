@@ -116,9 +116,9 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.deleteUser = deleteUser;
 const logInUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let { id, password, role } = req.body;
+        let { email, password } = req.body;
         let user = yield prisma.user.findFirst({
-            where: { id: id },
+            where: { email: email },
         });
         if (user !== null) {
             if ((yield bcrypt.compare(password, user.password)) === true) {

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateAttendance = exports.addAttendance = void 0;
+exports.getUserAttendance = exports.summary = exports.updateAttendance = exports.addAttendance = void 0;
 const client_1 = __importDefault(require("../client"));
 const addAttendance = (attendance) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -45,3 +45,38 @@ const updateAttendance = (attendance) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.updateAttendance = updateAttendance;
+const summary = (users) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const attendance = yield client_1.default.user.findMany({
+            include: {
+                attendance: true,
+            },
+        });
+        for (let i of attendance) {
+            console.log(i.attendance);
+        }
+        return attendance;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.summary = summary;
+const getUserAttendance = (users) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const attendance = yield client_1.default.user.findUnique({
+            where: {
+                id: users.id,
+            },
+            include: {
+                attendance: true,
+            },
+        });
+        // console.log('attendance is ',attendance?.attendance);
+        return attendance;
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.getUserAttendance = getUserAttendance;

@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 const nodemailer = require("nodemailer");
 const prisma = new PrismaClient();
+const dotenv = require('dotenv');
+dotenv.config();
 const date = new Date();
 export const addAttendance = async (req: Request, res: Response) => {
   try {
@@ -68,8 +70,6 @@ export const summary = async (req: Request, res: Response) => {
   }
 };
 
-
-
 export const updateAttendance = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -97,10 +97,10 @@ export const updateAttendance = async (req: Request, res: Response) => {
 const sendEmail = () => {
   try {
     var from = "muhammadali.alphasquad@gmail.com";
-    var to = "rizwan.alphasquad@gmail.com";
+    var to = "muhammadali.alphasquad@gmail.com";
     var subject = "Attendance";
     var text = " ";
-    var html = " ";
+    var html = "Attendance Added";
     const mailOption = {
       from: from,
       to: to,
@@ -110,17 +110,19 @@ const sendEmail = () => {
     };
     const transporter = nodemailer.createTransport({
       host: process.env.HOST,
-      port: process.env.PORT2,
+      service:"gmail",
+      secure:true,
+      port: process.env.PORT2 ,
       auth: {
         user: process.env.USER,
-        password: process.env.PASSWORD,
+        pass: process.env.PASSWORD,
       },
     });
     transporter.sendMail(mailOption, function (err: any, info: any) {
       if (err) {
         console.log(err);
       } else {
-        console.log("Send Email")
+        console.log("Email Sent!")
       }
     });
   } catch (error) {

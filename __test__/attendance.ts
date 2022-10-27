@@ -5,6 +5,16 @@ interface Attendance {
   presentStatus: boolean;
   userId: number;
 }
+interface Users {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+  lastLogin: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  attendance: Array<Attendance>;
+}
 export const addAttendance = async (attendance: Attendance) => {
   try {
     const addAttendance = await prisma.attendance.create({
@@ -33,3 +43,32 @@ export const updateAttendance = async (attendance: Attendance) => {
     return error;
   }
 };
+export const summary = async (users: Users) => {
+  try {
+    const attendance = await prisma.user.findMany({
+      include: {
+        attendance: true,
+      },
+    });
+    return attendance;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getUserAttendance = async (users : Users) => {
+  try {
+    const attendance = await prisma.user.findUnique({
+      where: {
+        id: users.id,
+      },
+      include: {
+        attendance: true,
+      },
+    });
+    return attendance;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+

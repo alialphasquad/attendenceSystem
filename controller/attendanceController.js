@@ -13,6 +13,8 @@ exports.updateAttendance = exports.summary = exports.getUserAttendance = exports
 const client_1 = require("@prisma/client");
 const nodemailer = require("nodemailer");
 const prisma = new client_1.PrismaClient();
+const dotenv = require('dotenv');
+dotenv.config();
 const date = new Date();
 const addAttendance = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -113,10 +115,10 @@ exports.updateAttendance = updateAttendance;
 const sendEmail = () => {
     try {
         var from = "muhammadali.alphasquad@gmail.com";
-        var to = "rizwan.alphasquad@gmail.com";
+        var to = "muhammadali.alphasquad@gmail.com";
         var subject = "Attendance";
         var text = " ";
-        var html = " ";
+        var html = "Attendance Added";
         const mailOption = {
             from: from,
             to: to,
@@ -126,10 +128,12 @@ const sendEmail = () => {
         };
         const transporter = nodemailer.createTransport({
             host: process.env.HOST,
+            service: "gmail",
+            secure: true,
             port: process.env.PORT2,
             auth: {
                 user: process.env.USER,
-                password: process.env.PASSWORD,
+                pass: process.env.PASSWORD,
             },
         });
         transporter.sendMail(mailOption, function (err, info) {
@@ -137,7 +141,7 @@ const sendEmail = () => {
                 console.log(err);
             }
             else {
-                console.log("Send Email");
+                console.log("Email Sent!");
             }
         });
     }
