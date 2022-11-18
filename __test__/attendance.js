@@ -52,9 +52,6 @@ const summary = (users) => __awaiter(void 0, void 0, void 0, function* () {
                 attendance: true,
             },
         });
-        for (let i of attendance) {
-            console.log(i.attendance);
-        }
         return attendance;
     }
     catch (error) {
@@ -72,7 +69,6 @@ const getUserAttendance = (users) => __awaiter(void 0, void 0, void 0, function*
                 attendance: true,
             },
         });
-        // console.log('attendance is ',attendance?.attendance);
         return attendance;
     }
     catch (error) {
